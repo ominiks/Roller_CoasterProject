@@ -18,6 +18,7 @@ class Person:
         else:
             print("Sorry " + self.name + ", You may not ride a roller caoster because you are too young")
             
+#Define visitors details
 james = Person("james", 10, 140)
 rose = Person("rose", 12, 150)
 dove = Person("dove", 12, 150)
