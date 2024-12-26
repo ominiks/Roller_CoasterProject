@@ -1,24 +1,33 @@
 # change example by rifky
 class Person:
+    # Class variable to store all visitors
+    visitors = []
+
     def __init__(self, name, age, height):
-        self.name = name;
-        self.age = age;
-        self.height = height;
-        #name = str(input("Enter name: "))
-        #age = int(input("Enter age: "))
-        #height = float(input("Enter height: "))
-    
+        self.name = name
+        self.age = age
+        self.height = height
+        # Add the visitor to the class list
+        Person.visitors.append(self)
+
+    # new method to get all visitor names
+    @classmethod
+    def getAllVisitorNames(cls):
+        return [visitor.name for visitor in cls.visitors]
+
     def sayHello(self):
         print("Hello " + str(self.name) + ", Nice to meet you")
-        
+
     def ride(self):
         self.sayHello()
         if self.age > 10 and self.height >= 100:
-            print("Congratulation " + self.name + "! You may ride a roller coaster")
+            print("Congratulation " + self.name +
+                  "! You may ride a roller coaster")
         else:
-            print("Sorry " + self.name + ", You may not ride a roller caoster because you are too young")
-            
-#Define visitors details
+            print("Sorry " + self.name +
+                  ", You may not ride a roller caoster because you are too young")
+
+
 james = Person("james", 10, 140)
 rose = Person("rose", 12, 150)
 dove = Person("dove", 12, 150)
@@ -26,19 +35,18 @@ diva = Person("diva", 8, 130)
 mark = Person("mark", 12, 95)
 
 while True:
-    name = input("Enter name :")
-    if name == "james":
-        james.ride()
-    elif name =="rose":
-            rose.ride()
-    elif name =="dove":
-            dove.ride()
-    elif name =="diva":
-            diva.ride()
-    elif name =="mark":
-        mark.ride()
-    else:
+    name = input("Enter name: ")
+    found = False
+    
+    # Find the matching visitor object and call their ride method
+    for visitor in Person.visitors:
+        if name.lower() == visitor.name.lower():
+            visitor.ride()
+            found = True
+            break
+    
+    if not found:
         print("Invalid input")
-        ans = input("'y' to continue / 'n' to quit :")
-        if ans == "n":
+        ans = input("'y' to continue / 'n' to quit: ")
+        if ans.lower() == "n":
             break
