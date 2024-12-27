@@ -10,11 +10,6 @@ class Person:
         # Add the visitor to the class list
         Person.visitors.append(self)
 
-    # new method to get all visitor names
-    @classmethod
-    def getAllVisitorNames(cls):
-        return [visitor.name for visitor in cls.visitors]
-
     def sayHello(self):
         print("Hello " + str(self.name) + ", Nice to meet you")
 
@@ -26,7 +21,6 @@ class Person:
         else:
             print("Sorry " + self.name +
                   ", You may not ride a roller caoster because you are too young")
-
 
 james = Person("james", 10, 140)
 rose = Person("rose", 12, 150)
